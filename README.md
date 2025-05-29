@@ -38,12 +38,8 @@ tar -zxvf bert_prism_data.tar.gz
 ```
 
 
-### Pre-train
-Coming soon...
-
-
-### Downstream
-To run the downstream tasks, you need to set the path and modify the mode to 'test'.
+### Testing
+* To run the downstream tasks, you need to set the path and modify the mode to **'test'**.
 ```python
 # Modify the path of the models and data
 config['root'] = '/xxx/bert_prism_data/'
@@ -51,8 +47,8 @@ config['root'] = '/xxx/bert_prism_data/'
 # Set the mode as 'test'
 config['mode'] = 'test'
 ```
-Then, you can quickly verify each downstream task, and the results are saved in the './results' folder.
-```python
+* Then, you can quickly verify each downstream task, and the results are saved in the **'./results'** folder.
+```shell
 # Authenticity classification
 python 1train/authenticity_cls/main.py
 
@@ -61,21 +57,38 @@ python 1train/transcript_level_cls/main.py
 
 # Transcript level prediction
 python 1train/transcript_level_pred/main.py
-
-# Generation
-python 1train/generation/main.py
 ```
 
 
 ### Prediction
-Use the existing model to generate the target sequence and make a preliminary determination. Then, use the blast tool to perform genomic alignment on the generated sequence. Access [NCBI](https://blast.ncbi.nlm.nih.gov/doc/blast-help/downloadblastdata.html) to download the latest version of the blast tool, or click here ([blast-2.16.0+-x64-linux.tar.gz](https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.16.0+-x64-linux.tar.gz)).
+* To predict the target sequence, first you need to perform the generation task and generate the target sequence. The default location for the output file **'gen_seqs.csv'** is in **'./results/predicts/'** folder.
+```python
+# Modify the path of the models and data
+config['root'] = '/xxx/bert_prism_data/'
 
-```bash
+# Generation
+python 1train/generation/main.py
+```
+* Then you need to set the path and modify the mode to **'predict'** in each downstream task.
+```python
+# Modify the path of the models and data
+config['root'] = '/xxx/bert_prism_data/'
+
+# Set the mode as 'predict'
+config['mode'] = 'predict'
+
+# Predict
+python 1train/xxx/main.py
+```
+
+* Use the blast tool to perform genomic alignment on the generated sequence. Access [NCBI](https://blast.ncbi.nlm.nih.gov/doc/blast-help/downloadblastdata.html) to download the latest version of the blast tool, or click here ([blast-2.16.0+-x64-linux.tar.gz](https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.16.0+-x64-linux.tar.gz)).
+
+```shell
 # Extract the blast tool
 tar -zxvf ncbi-blast-2.16.0+-x64-linux.tar.gz
 
 # Modify paths
-root_dir = '/xxx/bert_prism_example/'
+root_dir = '/xxx/bert_prism/'
 blast_dir = '/xxx/ncbi-blast-2.16.0+/'
 
 # Run

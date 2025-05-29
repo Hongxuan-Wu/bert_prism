@@ -1,8 +1,9 @@
 einops
 transformers==4.29.2
-tensorboardX
 nltk
-scikit-learn
 pandas
 matplotlib
+scikit-learn
+umap-learn
+tensorboardX
 # torch==1.13.1
