@@ -53,6 +53,7 @@ config['mode'] = 'test'
 python 1train/authenticity_cls/main.py
 
 # Transcript level classification
+config['num_class'] = 4  # 2 or 4
 python 1train/transcript_level_cls/main.py
 
 # Transcript level prediction
