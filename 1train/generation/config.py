@@ -6,8 +6,6 @@ config['token_length'] = 100
 
 config['mode'] = 'generate'
 
-config['save_metrics'] = True
-
 config['root'] = '/data/whx/projects/bert_prism_data/'
 
 ################################################################### Model ##############################################################

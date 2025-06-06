@@ -9,8 +9,6 @@ import numpy as np
 import pandas as pd
 import pdb
 
-import matplotlib.pyplot as plt
-from umap import UMAP
 from torch import autocast
 from transformers import AutoTokenizer
 
@@ -48,8 +46,6 @@ class Trainer(object):
             self.criterion = nn.BCEWithLogitsLoss()
         else:
             self.criterion = nn.CrossEntropyLoss()
-            
-        self.reducer = UMAP(n_components=2, random_state=args.seed)
         
         self.args = args
         self.config = config
@@ -86,7 +82,7 @@ class Trainer(object):
                 if step % self.args.display_step == 0 or step == (total_len - 1):
                     self.logger.info(f"Eval[{step}/{total_len}]  "
                         f"Loss: {losses.val:.5f} ({losses.avg:.5f})  "
-                        )
+                    )
         predictions = torch.cat(predictions)
         Y = torch.cat(Y)
         features = torch.cat(features)
@@ -98,32 +94,6 @@ class Trainer(object):
         metrics = self.compute_metrics(y_true, y_pred)
         loss_avg = losses.avg
         
-        # pdb.set_trace()
-        
-        if self.config['save_roc_auc']:
-            df_roc_auc = pd.DataFrame([metrics['fpr'], metrics['tpr']]).T
-            df_roc_auc.to_csv(osp.join(self.args.metrics_dir, 'roc_auc.csv'), sep=',', index=False, header=['FPR', 'TPR'])
-        
-        if self.config['save_y']:
-            df_y = pd.DataFrame([y_true, y_pred]).T
-            df_y.to_csv(osp.join(self.args.metrics_dir, 'y.csv'), sep=',', index=False, header=['y_trues', 'y_pred'])
-        
-        if self.config['save_scatter']:
-            features_reducer = self.reducer.fit_transform(features)
-            df = pd.DataFrame(features_reducer)
-            df['label'] = y_true
-
-            df.to_csv(osp.join(self.args.metrics_dir, 'scatter.csv'), sep=',', index=False, header=True)
-        
-            colors = ['#179b73' if y==1 else '#d48aaf' for y in y_true]
-            plt.scatter(features_reducer[:,0], features_reducer[:,1], s=5, c=colors, alpha=1)
-            plt.savefig(osp.join(self.args.metrics_dir, 'scatter.png'))
-
-        if self.config['save_metrics']:
-            df_metrics = pd.DataFrame([metrics]).T
-            df_metrics.columns = ['metrics']
-            df_metrics.to_csv(osp.join(self.args.metrics_dir, 'metrics.csv'), sep=',', index=True, header=True)
-            
         return [loss_avg, metrics]
     
     def predict(self):

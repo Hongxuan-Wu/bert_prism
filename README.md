@@ -58,6 +58,9 @@ python 1train/transcript_level_cls/main.py
 
 # Transcript level prediction
 python 1train/transcript_level_pred/main.py
+
+# Component correlation analysis
+python 1train/component_correlation_analysis/main.py
 ```
 
 

@@ -8,7 +8,6 @@ import pdb
 
 import nltk
 from nltk.translate.bleu_score import SmoothingFunction as SF
-from umap import UMAP
 from transformers import AutoTokenizer
 from model import PromoterGenerationDiffusion
 from dataloader import load_dataframe, make_loader

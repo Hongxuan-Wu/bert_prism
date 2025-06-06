@@ -10,8 +10,6 @@ import scipy
 import pandas as pd
 import pdb
 
-import matplotlib.pyplot as plt
-from umap import UMAP
 from torch import autocast
 from transformers import AutoTokenizer
 
@@ -46,8 +44,6 @@ class Trainer(object):
         
         # set loss
         self.criterion = nn.MSELoss(reduction='mean')
-        
-        self.reducer = UMAP(n_components=2, random_state=args.seed)
         
         self.args = args
         self.config = config
@@ -96,30 +92,6 @@ class Trainer(object):
         metrics = self.compute_metrics(y_true, y_pred)
         loss_avg = losses.avg
         
-        if self.config['save_y']:
-            # tpm_true = np.expm1(y_true)
-            # tpm_pred = np.expm1(y_pred)
-            # df_y = pd.DataFrame([tpm_true, tpm_pred]).T
-            
-            df_y = pd.DataFrame([y_true, y_pred]).T            
-            df_y.to_csv(osp.join(self.args.metrics_dir, 'y.csv'), sep=',', index=False, header=['y_trues', 'y_pred'])
-        
-        if self.config['save_scatter']:
-            features_reducer = self.reducer.fit_transform(features)
-            df = pd.DataFrame(features_reducer)
-            df['label'] = y_true
-
-            df.to_csv(osp.join(self.args.metrics_dir, 'scatter.csv'), sep=',', index=False, header=True)
-        
-            colors = ['#179b73' if y==1 else '#d48aaf' for y in y_true]
-            plt.scatter(features_reducer[:,0], features_reducer[:,1], s=5, c=colors, alpha=1)
-            plt.savefig(osp.join(self.args.metrics_dir, 'scatter.png'))
-
-        if self.config['save_metrics']:
-            df_metrics = pd.DataFrame([metrics]).T
-            df_metrics.columns = ['metrics']
-            df_metrics.to_csv(osp.join(self.args.metrics_dir, 'metrics.csv'), sep=',', index=True, header=True)
-            
         return [loss_avg, metrics]
 
     def predict(self):

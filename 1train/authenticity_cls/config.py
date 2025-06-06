@@ -5,11 +5,6 @@ config = OrderedDict()
 # config['mode'] = 'test'
 config['mode'] = 'predict'
 
-config['save_metrics'] = True
-config['save_roc_auc'] = True
-config['save_y'] = True
-config['save_scatter'] = True
-
 config['root'] = '/data/whx/projects/bert_prism_data/'
 
 ################################################################### Model ##############################################################

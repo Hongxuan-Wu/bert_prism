@@ -5,10 +5,6 @@ config = OrderedDict()
 # config['mode'] = 'test'
 config['mode'] = 'predict'
 
-config['save_metrics'] = True
-config['save_y'] = True
-config['save_scatter'] = True
-
 # config['num_class'] = 2
 config['num_class'] = 4
 
