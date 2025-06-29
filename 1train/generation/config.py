@@ -6,10 +6,10 @@ config['token_length'] = 100
 
 config['mode'] = 'generate'
 
-config['root'] = '/data/whx/projects/bert_prism_data/'
+config['root'] = '/data/whx/projects/prism_data/'
 
 ################################################################### Model ##############################################################
-config['pretrained_path'] = config['root']+ "pretrained/BERT-PRISM-1/"
+config['pretrained_path'] = config['root']+ "pretrained/PRISM-M1/"
 
 if config['mode'] == 'generate':
     config['checkpoint_dir'] = config['root'] + 'generation/m1_genes_escherichia/'

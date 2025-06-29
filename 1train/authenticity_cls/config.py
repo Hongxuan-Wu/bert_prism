@@ -5,12 +5,12 @@ config = OrderedDict()
 # config['mode'] = 'test'
 config['mode'] = 'predict'
 
-config['root'] = '/data/whx/projects/bert_prism_data/'
+config['root'] = '/data/whx/projects/prism_data/'
 
 ################################################################### Model ##############################################################
 config['output_type'] = 'pool'  # pool / cls / mean
 
-config['pretrained_path'] = config['root']+ "pretrained/BERT-PRISM-1/"
+config['pretrained_path'] = config['root']+ "pretrained/PRISM-M1/"
 
 #################################################################### Data ##############################################################
 

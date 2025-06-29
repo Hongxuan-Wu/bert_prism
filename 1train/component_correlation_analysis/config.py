@@ -4,12 +4,12 @@ config = OrderedDict()
 
 config['mode'] = 'test'
 
-config['root'] = '/data/whx/projects/bert_prism_data/'
+config['root'] = '/data/whx/projects/prism_data/'
 
 ################################################################### Model ##############################################################
 config['output_type'] = 'pool'  # pool / cls / mean
 
-config['pretrained_path'] = config['root']+ "pretrained/BERT-PRISM-1/"
+config['pretrained_path'] = config['root']+ "pretrained/PRISM-M1/"
 
 config['components'] = True
 # config['components'] = False
@@ -23,7 +23,7 @@ config['root_data'] = config['root_project']
 if config['mode'] == 'test':
     config['valid_batch_size'] = 256  # 2048
 
-    config['checkpoint_dir'] = config['root'] + 'component_correlation_analysis/BERT-PRISM-1_components_filtered_crossattn/'
+    config['checkpoint_dir'] = config['root'] + 'component_correlation_analysis/m1_components_filtered_crossattn/'
 
     config['dataset'] = 'components'
     

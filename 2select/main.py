@@ -4,7 +4,7 @@ import pandas as pd
 import subprocess
 import pdb
 
-root_dir = '/data/whx/projects/bert_prism/'
+root_dir = '/data/whx/projects/prism/'
 blast_dir = '/home/whx/Downloads/ncbi-blast-2.16.0+/'
 
 predict_dir = root_dir + 'results/predicts/'

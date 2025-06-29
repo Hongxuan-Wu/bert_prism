@@ -1,10 +1,10 @@
-# BERT-PRISM: A Large-Scale Pretrained Model for Prokaryotic Expression Elements Recognition, Intensity, Synthesis, and Modulation
+# PRISM: A deep learning framework for prokaryotic expression element recognition, intensity, synthesis, and modulation based on DNA large language model
 
-![workflow](workflow.jpg)
+![framework](framework.jpg)
 
 
 ## 🔭Overview
-**BERT-PRISM** is a pre-trained model specifically designed for prokaryotic promoters. This model was further fine-tuned on traditional prokaryotic pre-trained models (e.g., [DNABERT-2](https://github.com/MAGICS-LAB/DNABERT_2)) using over **30 million** promoter sequences. It not only outperforms DNABERT-2 on various specific downstream tasks, but also surpasses the model trained from scratch. Furthermore, we have developed an integrated workflow based on this model to efficiently screen highly-expressive artificial promoter sequences and validate their performance by experiments.
+**PRISM** is a practical framework based on existing DNA LLMs (e.g., [DNABERT-2](https://github.com/MAGICS-LAB/DNABERT_2)) and combined a two-stage fine-tuning strategy for prokaryotic expression elements. Full fine-tuning based on **30 million** sequences collected from **8,447** prokaryotic species was employed to endow DNABERT-2 with prior knowledge of prokaryotic expression elements. Next, partial fine-tuning was further used to quickly build multiple downstream tasks models including authenticity determination, transcription level classification, de novo expression element generation, transcription level prediction, and component correlation analysis. Lastly, multiple downstream tasks were tested by wet experiments in model and non-model prokaryotes. This study highlights the broad applicability of the PRISM framework for prokaryotic expression elements and its potential in advancing synthetic biology.
 
 
 ## 🎯Quick Start
@@ -12,14 +12,14 @@
 ### Dependencies
 * Clone this repo, cd into it
 ```shell
-git clone https://github.com/Hongxuan-Wu/bert_prism.git
-cd bert_prism
+git clone https://github.com/Hongxuan-Wu/prism.git
+cd prism
 ```
 
 * Install requirements with Python 3.8 and [PyTorch](https://pytorch.org/get-started/previous-versions/) 1.13.1. We prefer to create a [conda](https://www.anaconda.com/docs/getting-started/miniconda/main) environment to manage all packages.
 ```shell
-conda create -n bertprism python=3.8
-conda activate bertprism
+conda create -n prism python=3.8
+conda activate prism
 
 conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.7 -c pytorch -c nvidia
 ```
@@ -34,7 +34,7 @@ pip install -r requirements.txt
 All models and datasets for the demo are now available on [Hugging Face](https://huggingface.co/datasets/Hongxuan-Wu/PED). 
 ```shell
 # Extract the dataset
-tar -zxvf bert_prism_data.tar.gz
+tar -zxvf prism_data.tar.gz
 ```
 
 
@@ -42,7 +42,7 @@ tar -zxvf bert_prism_data.tar.gz
 * To run the downstream tasks, you need to set the path and modify the mode to **'test'**.
 ```python
 # Modify the path of the models and data
-config['root'] = '/xxx/bert_prism_data/'
+config['root'] = '/xxx/prism_data/'
 
 # Set the mode as 'test'
 config['mode'] = 'test'
@@ -68,7 +68,7 @@ python 1train/component_correlation_analysis/main.py
 * To predict the target sequence, first you need to perform the generation task and generate the target sequence. The default location for the output file **'gen_seqs.csv'** is in **'./results/predicts/'** folder.
 ```python
 # Modify the path of the models and data
-config['root'] = '/xxx/bert_prism_data/'
+config['root'] = '/xxx/prism_data/'
 
 # Generation
 python 1train/generation/main.py
@@ -76,7 +76,7 @@ python 1train/generation/main.py
 * Then you need to set the path and modify the mode to **'predict'** in each downstream task.
 ```python
 # Modify the path of the models and data
-config['root'] = '/xxx/bert_prism_data/'
+config['root'] = '/xxx/prism_data/'
 
 # Set the mode as 'predict'
 config['mode'] = 'predict'
@@ -92,7 +92,7 @@ python 1train/xxx/main.py
 tar -zxvf ncbi-blast-2.16.0+-x64-linux.tar.gz
 
 # Modify paths
-root_dir = '/xxx/bert_prism/'
+root_dir = '/xxx/prism/'
 blast_dir = '/xxx/ncbi-blast-2.16.0+/'
 
 # Run
@@ -106,7 +106,7 @@ We integrate the results of these two parts, determine some sequences and conduc
 
 
 ## 🤝Contact
-If you have any questions, please raise an issue or contact us at walter_hx@163.com.
+If you have any questions, please raise an issue or contact us at hxwu97nnu@gmail.com.
 
 
 <!-- ## 📜 Citation
@@ -114,7 +114,7 @@ If you find this work useful, please cite our paper:
 ```
 @article{
     huang2021prism,
-    title={BERT-PRISM: A Large-Scale Pretrained Model for Prokaryotic Expression Elements Recognition, Intensity, Synthesis, and Modulation},
+    title={PRISM: A deep learning framework for prokaryotic expression element recognition, intensity, synthesis, and modulation based on DNA large language model},
     author={},
     journal={},
     year={2021}

@@ -15,12 +15,12 @@ if config['num_class'] == 2:
 else:
     config['save_roc_auc'] = False
 
-config['root'] = '/data/whx/projects/bert_prism_data/'
+config['root'] = '/data/whx/projects/prism_data/'
 
 ################################################################### Model ##############################################################
 config['output_type'] = 'pool'  # pool / cls / mean
 
-config['pretrained_path'] = config['root']+ "pretrained/BERT-PRISM-1/"
+config['pretrained_path'] = config['root']+ "pretrained/PRISM-M1/"
 
 #################################################################### Data ##############################################################
 
