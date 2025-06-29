@@ -102,7 +102,7 @@ We integrate the results of these two parts, determine some sequences and conduc
 
 
 ## 📚 Datasets
-* [EC](https://huggingface.co/datasets/Hongxuan-Wu/EC)
+* EC, downstream datasets and supplementary data can be found on [huggingface](https://huggingface.co/datasets/Hongxuan-Wu/prism).
 
 
 ## 🤝Contact
